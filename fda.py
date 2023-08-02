@@ -8,7 +8,7 @@ import logging
 def get():
     api_url = 'https://api.fda.gov'
     base_url = api_url + '/device/510k.json'
-
+    count = 0
     my_params = {"params":
                      {"limit": 100,"skip": 0},
                  "base_url": base_url}
@@ -17,14 +17,14 @@ def get():
 
     while (response.status_code == 200):
         response = call_api(my_params)
-        my_params['params']['skip'] += 1
-        logging.debug(f'On {my_params["params"]["skip"]} iteration of the loop')
+        my_params['params']['skip'] += 100
+        logging.debug(f'On {count} iteration of the loop, est. {my_params["limit"] * count} records fetched.')
 
 def call_api(params):
     response = requests.get(url=params['base_url'], params=params['params'])
     if response.status_code == 200:
         # df = pd.read_json(text)
-        time.sleep(0.1)
+        time.sleep(0.05)
         array = response.json()
         text = json.dumps(array)
         dataset = json.loads(text)
