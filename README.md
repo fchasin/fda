@@ -1,3 +1,6 @@
+# Open FDA
+This is a crazy simple script that pulls data from the open FDA API and writes it to a csv. 
+
 ### Installation
 Ensure that you're in a preferred python dev environment with pip installed, and run `pip install -r requirements.txt`
 
