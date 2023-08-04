@@ -18,13 +18,14 @@ def get():
     while (response.status_code == 200):
         response = call_api(my_params)
         my_params['params']['skip'] += 100
-        logging.debug(f'On {count} iteration of the loop, est. {my_params["limit"] * count} records fetched.')
+        count += 1
+        logging.debug(f'On {count} iteration of the loop, est. {my_params["params"]["limit"] * count} records fetched.')
 
 def call_api(params):
     response = requests.get(url=params['base_url'], params=params['params'])
     if response.status_code == 200:
         # df = pd.read_json(text)
-        time.sleep(0.05)
+        time.sleep(0.1)
         array = response.json()
         text = json.dumps(array)
         dataset = json.loads(text)
@@ -69,6 +70,13 @@ def write(apps, csvWriter):
     for line in apps:
         csvWriter.writerow(line.values())
 
+def translate():
+    with open('device-event-0001-of-0001.json', encoding='utf-8') as inputfile:
+        df = pd.read_json(inputfile)
+        df.to_csv('csvfile.csv', encoding='utf-8', index=False)
+
+
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s', level=logging.DEBUG)
-    get()
+    # get()
+    translate()
