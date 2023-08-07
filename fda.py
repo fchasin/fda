@@ -1,4 +1,3 @@
-import pandas as pd
 import requests
 import json
 import csv
@@ -70,13 +69,6 @@ def write(apps, csvWriter):
     for line in apps:
         csvWriter.writerow(line.values())
 
-def translate():
-    with open('device-event-0001-of-0001.json', encoding='utf-8') as inputfile:
-        df = pd.read_json(inputfile)
-        df.to_csv('csvfile.csv', encoding='utf-8', index=False)
-
-
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(levelname)s:%(message)s', level=logging.DEBUG)
-    # get()
-    translate()
+    get()
