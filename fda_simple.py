@@ -2,7 +2,7 @@ import csv
 
 import logging
 import json
-from fda import write, write_first, write_next
+from utils import write_first
 
 def from_json():
     count = 0
